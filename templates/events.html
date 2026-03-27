@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Events</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h2>All Events</h2>
+
+{% for item in event_data %}
+<div class="event-card">
+
+    <h3>{{ item.event[1] }}</h3>
+    <p>{{ item.event[2] }} | {{ item.event[3] }}</p>
+    <p>{{ item.event[4] }}</p>
+
+    <div class="image-scroll">
+        <div class="image-scroll-track">
+            {% for image in item.images %}
+                <img src="{{ url_for('static', filename='uploads/' + image[0]) }}">
+            {% endfor %}
+            {% for image in item.images %}
+                <img src="{{ url_for('static', filename='uploads/' + image[0]) }}">
+            {% endfor %}
+        </div>
+    </div>
+
+    <a class="view-btn" href="/event/{{ item.event[0] }}">View All</a>
+</div>
+{% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ event[1] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h2>{{ event[1] }}</h2>
+<p>{{ event[2] }} | {{ event[3] }}</p>
+<p>{{ event[4] }}</p>
+
+<div class="image-scroll">
+    {% for image in images %}
+        <img src="{{ url_for('static', filename='uploads/' + image[0]) }}">
+    {% endfor %}
+</div>
+
+</body>
+</html>

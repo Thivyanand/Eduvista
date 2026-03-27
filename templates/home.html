@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduVista</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- HERO SECTION -->
+<section class="hero">
+
+    <!-- Background Video -->
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="{{ url_for('static', filename='hero.mp4') }}" type="video/mp4">
+    </video>
+
+    <!-- Dark Overlay -->
+    <div class="hero-overlay"></div>
+
+    <!-- NAVBAR -->
+    <div class="hero-navbar">
+
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="EduVista Logo">
+        </div>
+
+        <div class="nav-links">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('events_page') }}">Events</a>
+
+            {% if 'user_id' in session %}
+                {% if session['role'] == 'admin' %}
+                    <a href="{{ url_for('admin_dashboard') }}">Admin Panel</a>
+                {% endif %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('signup') }}">Sign Up</a>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <!-- HERO TEXT -->
+    <div class="hero-content">
+        <h1>EDUVISTA</h1>
+        <p>University Event Gallery</p>
+    </div>
+
+</section>
+
+
+<!-- RECENT EVENTS SECTION -->
+<section class="events">
+    <h2>Recent Events</h2>
+
+    {% for item in event_data %}
+    <div class="event-card">
+
+        <h3>{{ item.event[1] }}</h3>
+        <p>{{ item.event[2] }} | {{ item.event[3] }}</p>
+
+        <div class="image-scroll">
+            <div class="image-scroll-track">
+                {% for image in item.images %}
+                    <img src="{{ url_for('static', filename='uploads/' + image[0]) }}">
+                {% endfor %}
+                {% for image in item.images %}
+                    <img src="{{ url_for('static', filename='uploads/' + image[0]) }}">
+                {% endfor %}
+            </div>
+        </div>
+
+        <a class="view-btn" href="{{ url_for('event_gallery', event_id=item.event[0]) }}">
+            View All
+        </a>
+
+    </div>
+    {% endfor %}
+
+</section>
+
+<footer>
+    <p>© 2026 EduVista | University Event Gallery System</p>
+</footer>
+
+</body>
+</html>
