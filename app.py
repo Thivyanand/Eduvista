@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 import os
@@ -436,5 +436,4 @@ def signup():
     return render_template("signup.html")
 
 if __name__ == "__main__":
->>>>>>> da1349c084e29f6b3b43407dc9ada3fdf342efa3
     app.run(debug=True)
